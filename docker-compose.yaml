@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: jorge
+      MONGO_INITDB_ROOT_PASSWORD: cuaresma
+      MONGO_DATABASE_NAME: prueba_tecnica
+    ports:
+      - "27027:27017"
