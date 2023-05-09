@@ -96,7 +96,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
   const id = req.params.id
   const body: IUser = req.body
   try {
-    if (id !== res.locals.auth.id) { res.status(401).json({ msg: 'Unauthorized this is not your user' }); return }
+    if (id !== res.locals.auth._id) { res.status(401).json({ msg: 'Unauthorized this is not your user' }); return }
 
     const userExist = await User.findOne({ email: body.email })
     if (userExist !== null) { res.status(400).json({ msg: 'User with this email already exists' }); return }
