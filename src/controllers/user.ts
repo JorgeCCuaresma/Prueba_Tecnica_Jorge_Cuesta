@@ -122,14 +122,19 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
 
     if (user === null) { res.status(404).json({ msg: 'User not found' }); return }
 
-    const userToSend = {
-      _id: user._id,
-      name: user.name,
-      surname: user.surname,
-      email: user.email,
-      phone: user.phone
+    const userModified = await User.findById(id)
+
+    let userToSend
+    if (userModified !== null) {
+      userToSend = {
+        _id: userModified._id,
+        name: userModified.name,
+        surname: userModified.surname,
+        email: userModified.email,
+        phone: userModified.phone
+      }
     }
-    res.status(200).json(userToSend)
+    res.status(200).json({ userToSend })
   } catch (error) {
     res.status(500).send(error)
   }
